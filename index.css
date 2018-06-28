@@ -1,0 +1,38 @@
+* {
+  box-sizing: border-box;
+}
+
+h1 {
+  text-align: center;
+}
+
+.container {
+  text-align: center;
+	margin: auto;
+	width: 100%;
+  max-width: 100%;
+}
+
+.js-search-box, button {
+  height: 25px;
+}
+.thumb {
+  display: inline-block;
+}
+
+.js-img {
+  padding-top: 10px;
+  width: 100%;
+}
+.js-search-form {
+  text-align: center;
+}
+
+legend {
+  padding-bottom: 10px;
+}
+
+
+button:hover {
+  cursor: pointer;
+}
