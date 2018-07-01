@@ -1,12 +1,17 @@
 const YOUTUBE_SEARCH_URL = 'https://www.googleapis.com/youtube/v3/search';
+var nextPage
+var prevPage
+var searchedTerm
 
-function buildApi(searchTerm, callback) { 
+function getApi(searchTerm, pageToken, callback) { 
 	const query = {
 		q: `${searchTerm}`,
 		key: 'AIzaSyAguHxr44JrJWdif4UWRZD8NRTzrMRf5g4',
 		part: 'snippet', 
-		maxResults: 8,
+		maxResults: 9,
+    pageToken: pageToken
 	}
+  searchedTerm = searchedTerm
 	$.getJSON(YOUTUBE_SEARCH_URL, query, callback)
 };
 
@@ -24,10 +29,10 @@ function renderResults(result){
 
 
 //getData happens for each item we come across
-function getData(data){ 
-	console.log(data); //so we can see the object we get
-	const results = data.items.map((item) => renderResults(item)); 
-	$('.js-results').html(results); 
+function getData(data){
+  $('.js-results').html(data.items.map(renderResults)).append(renderPageNav(data))
+
+console.log(data)
 }
 
 function listenSubmit(){ 
@@ -36,9 +41,32 @@ function listenSubmit(){
 		const searchTarget = $(event.currentTarget).find('.js-search-box'); 
 		const search = searchTarget.val(); 
 		searchTarget.val(""); 
-		buildApi(search, getData); 
+		getApi(search,undefined, getData); 
 	});
 };
 
+function listenPageNav(data) {
+  $('.js-results').on('click', '#next', function(event){
+    getApi(searchedTerm, nextPage, getData)
+  })
+  $('.js-results').on('click', '#prev', function(event){
+    getApi(searchedTerm, prevPage, getData)
+  })
+}
 
+function renderPageNav (data) {
+  nextPage = data.nextPageToken
+  prevPage = data.prevPageToken
+  let startTag = `<div class="pageNav"><form><fieldset>`
+  let endTag = `</fieldset></form></div>`
+  if (prevPage) {
+    startTag += `<button type="button" id="prev" value="Prev">Prev</button>`
+  }
+  if (nextPage) {
+    startTag += `<button type="button" id="next" value="Next">Next</button>`
+  }
+  return startTag + endTag
+}
+
+$(listenPageNav);
 $(listenSubmit);
