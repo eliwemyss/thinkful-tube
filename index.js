@@ -11,7 +11,7 @@ function getApi(searchTerm, pageToken, callback) {
 		maxResults: 9,
     pageToken: pageToken
 	}
-  searchedTerm = searchedTerm
+  searchedTerm = searchTerm
 	$.getJSON(YOUTUBE_SEARCH_URL, query, callback)
 };
 
