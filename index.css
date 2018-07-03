@@ -2,37 +2,97 @@
   box-sizing: border-box;
 }
 
-h1 {
-  text-align: center;
-}
-
-.container {
-  text-align: center;
-	margin: auto;
-	width: 100%;
-  max-width: 100%;
-}
-
-.js-search-box, button {
-  height: 25px;
-}
-.thumb {
-  display: inline-block;
-}
-
-.js-img {
-  padding-top: 10px;
-  width: 100%;
-}
-.js-search-form {
-  text-align: center;
+main {
+ display: block; 
+ position: relative;
+ margin: 0 auto;
+ margin-top: 20%;
+ margin-bottom: 10px;
+ min-width: 300px;
+ max-width: 600px;
+ width: 60%;
+ background-color: white;
+ box-shadow: 0px 3px 5px -1px #3d0f0fcc;
+ border-radius: 10px;
 }
 
 legend {
-  padding-bottom: 10px;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  letter-spacing: -1px;
+  margin-top: 15px;
+  margin-bottom: 20px;
 }
 
+fieldset {
+  border: none;
+}
 
-button:hover {
+.js-search-box {
+  border: 01px solid #9b9b9b;
+  border-radius: 3px 0 0 3px;
+  padding-left: 10px;
+  min-width: 200px;
+  width: 70%;
+  height: 36px;
+  font-size: 18px;
+  vertical-align: bottom;
+  margin-bottom: 10px;
+}
+
+button#submit{
+  position: relative;
+  border: 1px solid #ff0000;
+  border-left: 0;
+  border-radius: 0 3px 3px 0;
+  padding: 0;
+  height: 36px;
+  width: 60px;
+  font-weight: 700;
+  color: #ffffff;
+  background: #ff0000;
+  margin-bottom: 10px;
+  margin-left: -5px;
   cursor: pointer;
+}
+
+button#next, button#prev{
+  align-content: center;
+}
+.container{
+  visibility: hidden;
+  margin: 15px auto;
+  display: flex;
+  flex-wrap: wrap;    
+  align-items: center;
+  justify-content: space-evenly;
+  max-width: 1024px;
+  box-shadow: 0px 3px 5px -1px #525252cc;
+  background-color: white;
+  border-radius: 10px;
+  padding-top: 10px;
+}
+
+.thumb {
+  align-items: center;
+  margin: 10px;
+  max-width: 300px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  box-shadow: 0px 3px 5px -1px #525252cc;
+  background-color: white;
+}
+.js-img {
+  width: 300px;
+  max-height: 180px;
+}
+
+.caption {
+  text-align: center;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  padding: 0 10px;
+  font-weight: bold;
 }

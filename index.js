@@ -17,48 +17,48 @@ function getApi(searchTerm, pageToken, callback) {
 
 function renderResults(result){ 
 	return `
-		<div class="col thumb">
+  <div class="col thumb">
 			<a href="https://www.youtube.com/watch?v=${result.id.videoId}"><img class="js-img" src="${result.snippet.thumbnails.medium.url}"></a>
 			<div class="col-4">
-				<p class="channel"><a href="https://www.youtube.com/watch?v=${result.snippet.channelId}">More videos by ${result.snippet.channelTitle}<p>
+				<p class="caption"><a href="https://www.youtube.com/watch?v=${result.snippet.channelId}">More videos by ${result.snippet.channelTitle}<p>
 			</div>
 		</div>
-		`
+		`;
 }
-
-
 
 //getData happens for each item we come across
 function getData(data){
   $('.js-results').html(data.items.map(renderResults)).append(renderPageNav(data))
 
 console.log(data)
+console.log(searchedTerm)
 }
 
 function listenSubmit(){ 
-	$('.js-search-form').submit(event => {
+	$('.js-search-form').submit(function(event) {
 		event.preventDefault();
 		const searchTarget = $(event.currentTarget).find('.js-search-box'); 
 		const search = searchTarget.val(); 
 		searchTarget.val(""); 
-		getApi(search,undefined, getData); 
+		getApi(search, undefined, getData);
+    $('.container').css('visibility', 'visible')
 	});
 };
 
 function listenPageNav(data) {
   $('.js-results').on('click', '#next', function(event){
     getApi(searchedTerm, nextPage, getData)
-  })
+  });
   $('.js-results').on('click', '#prev', function(event){
     getApi(searchedTerm, prevPage, getData)
-  })
+  });
 }
 
 function renderPageNav (data) {
-  nextPage = data.nextPageToken
-  prevPage = data.prevPageToken
-  let startTag = `<div class="pageNav"><form><fieldset>`
-  let endTag = `</fieldset></form></div>`
+  nextPage = data.nextPageToken;
+  prevPage = data.prevPageToken;
+  let startTag = `<div class="pageNav"><form><fieldset>`;
+  let endTag = `</fieldset></form></div>`;
   if (prevPage) {
     startTag += `<button type="button" id="prev" value="Prev">Prev</button>`
   }
