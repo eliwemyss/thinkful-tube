@@ -17,9 +17,9 @@ function getApi(searchTerm, pageToken, callback) {
 
 function renderResults(result){ 
 	return `
-  <div class="col thumb">
+  <div class="result">
 			<a href="https://www.youtube.com/watch?v=${result.id.videoId}"><img class="js-img" src="${result.snippet.thumbnails.medium.url}"></a>
-			<div class="col-4">
+			<div class="col">
 				<p class="caption"><a href="https://www.youtube.com/watch?v=${result.snippet.channelId}">More videos by ${result.snippet.channelTitle}<p>
 			</div>
 		</div>
